@@ -7,3 +7,12 @@
 
 /0:0:0:0:0:0:0:1 [Wed, 04 Apr 2018 00:21:08 GMT] GET /index.html HTTP/1.1 200 Content-Length: 76
 
+
+/0:0:0:0:0:0:0:1 [Wed, 04 Apr 2018 01:48:00 GMT] GET /images/testimage.html HTTP/1.1 200 Content-Length: 151
+
+
+/0:0:0:0:0:0:0:1 [Wed, 04 Apr 2018 01:49:01 GMT] GET /images/kidRock.jpg HTTP/1.1 200 Content-Length: 148027
+
+
+/0:0:0:0:0:0:0:1 [Wed, 04 Apr 2018 01:54:32 GMT] GET /Gifs/kidRock.gif HTTP/1.1 200 Content-Length: 1397524
+
