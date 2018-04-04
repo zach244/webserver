@@ -17,7 +17,7 @@
 
 <!-- LOG FILE -->
 <!-- macOS / Linux style -->
-<logfile log = "./logs/log.txt"></logfile> 
+<logfile log = "/Users/zachyoung/Desktop/net/Homework/webserver/echoserver/webserver/logs/log.txt"></logfile> 
 
 <!-- 404 FILE -->
 <!-- macOS / Linux style -->

@@ -53,19 +53,14 @@ public class Connection implements Runnable
 							splits[1] = configuration.getDefaultDocument(); //get default document
 							splits[1] = splits[1].substring(splits[1].lastIndexOf("/"));//remove / infront of index.html
 							}
-							System.out.println(splits[1]);
-							System.out.println(configuration.getDocumentRoot());
-							System.out.println(configuration.getDefaultDocument() + splits[1].substring(1));
 							File f = new File(configuration.getDocumentRoot() + splits[1].substring(1)); //create a new file with the request
 	
 							if(f.exists() && !f.isDirectory()){ //if file exists create 200 Ok header
-								System.out.println("File is here");
-								status = "HTTP/1.1 200 OK" + "\r\n";
+								status = "HTTP/1.1 200 OK" + "\r\n";//set status to 200 ok
 								contentLength = "Content-Length: " + f.length() + "\r\n"; //Content-length Header
 								logStatus = 200;
 							
 							}else{ //if file doesn't exist create 404 header and give the path to 404.html
-								System.out.println("File doesn't exist"); //prompt file doesn't exist
 								status = "HTTP/1.1 404 Not Found" + "\r\n"; //write 404 status
 								splits[1] = configuration.getFourOhFourDocument(); //get 404 location
 								splits[1] = splits[1].substring(splits[1].lastIndexOf("/")); //remove / before 404.html
@@ -95,11 +90,8 @@ public class Connection implements Runnable
 							logDate = dateFormat.format(calendar.getTime());
 							date = "Date: " + date + "\r\n"; //create the date header
 							serverName = "Server: " + configuration.getServerName() + "\r\n"; //get the serverName header
-							
 							String fullHeader = status + date + contentType + serverName //Construct the full Header including Connection: close
 							+ contentLength + "Connection: close\r\n\r\n";
-
-							// System.out.print(fullHeader);
 							splits[1] = splits[1].substring(1); //need to remove leading / from file path
 							out.write(fullHeader.getBytes()); //write the header to the client
 							out.flush();
@@ -111,9 +103,15 @@ public class Connection implements Runnable
 								out.write(buffer, 0, numBytes);
 							}
 							out.flush(); //flush
-						File logFile = new File(configuration.getLogFile()); //create the Logfile Object
-						if(!logFile.exists()){
-							logFile.createNewFile();
+							File logFile = new File(configuration.getLogFile()); //create the Logfile Object
+							File logParentDirectory = new File(logFile.getParent());//used to see if Log directory is valid
+											
+							if(!logFile.exists() && !logParentDirectory.isDirectory()){ //if the log file doens't exist and parent directory doesn't exist
+							logParentDirectory.mkdir(); //create new directory
+							logFile.createNewFile(); //create new logfile
+						}
+						else if(!logFile.exists() && logParentDirectory.isDirectory()){ // if the log file doesn't exist and the directory does
+							logFile.createNewFile(); //create new log file
 						}
 						logLine = "\n" + client.getLocalAddress().toString() + " " + "[" + logDate + "]" + " " //write to LogFile
 						 + line +  " " + logStatus + " " + contentLength;
