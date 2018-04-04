@@ -14,7 +14,7 @@ import java.net.*;
 import java.io.*;
 import java.util.concurrent.*;
 
-public class  EchoServerMT
+public class  WebServer
 {
 	public static final int DEFAULT_PORT = 8080;
 
