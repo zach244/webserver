@@ -16,3 +16,18 @@
 
 /0:0:0:0:0:0:0:1 [Wed, 04 Apr 2018 01:54:32 GMT] GET /Gifs/kidRock.gif HTTP/1.1 200 Content-Length: 1397524
 
+
+0:0:0:0:0:0:0:1 [Wed, 04 Apr 2018 18:28:36 GMT] GET /index.html HTTP/1.1 200 Content-Length: 76
+
+
+0:0:0:0:0:0:0:1 [Wed, 04 Apr 2018 18:28:36 GMT] GET /favicon.ico HTTP/1.1 404 Content-Length: /Users/zachyoung/Desktop/net/Homework/webserver/echoserver/webserver/404.html
+
+
+0:0:0:0:0:0:0:1 [Wed, 04 Apr 2018 18:32:58 GMT] GET /index.html HTTP/1.1 200 Content-Length: 76
+
+
+0:0:0:0:0:0:0:1 [Wed, 04 Apr 2018 18:33:13 GMT] GET /121212.html HTTP/1.1 404 Content-Length: /Users/zachyoung/Desktop/net/Homework/webserver/echoserver/webserver/404.html
+
+
+0:0:0:0:0:0:0:1 [Wed, 04 Apr 2018 18:34:39 GMT] GET /121212.html HTTP/1.1 404 Content-Length: 80
+

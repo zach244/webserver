@@ -61,10 +61,11 @@ public class Connection implements Runnable {
                 logStatus = 200;
 
             } else { //if file doesn't exist create 404 header and give the path to 404.html
+                File our404 = new File(configuration.getFourOhFourDocument());//create 404 file object using config path
                 status = "HTTP/1.1 404 Not Found" + "\r\n"; //write 404 status
                 splits[1] = configuration.getFourOhFourDocument(); //get 404 location
                 splits[1] = splits[1].substring(splits[1].lastIndexOf("/")); //remove / before 404.html
-                contentLength = "Content-Length: " + configuration.getFourOhFourDocument() + "\r\n"; //Content-length Header
+                contentLength = "Content-Length: " + our404.length() + "\r\n"; //Content-length Header
                 logStatus = 404;
             }
 
@@ -112,8 +113,9 @@ public class Connection implements Runnable {
             } else if (!logFile.exists() && logParentDirectory.isDirectory()) { // if the log file doesn't exist and the directory does
                 logFile.createNewFile(); //create new log file
             }
+            InetAddress ipAddr = client.getInetAddress();//create the ability to get the host address
 
-            logLine = "\n" + client.getLocalAddress().toString() + " " + "[" + logDate + "]" + " " //write to LogFile
+            logLine = "\n" + ipAddr.getHostAddress().toString() + " " + "[" + logDate + "]" + " " //write to LogFile
                     + line + " " + logStatus + " " + contentLength;
             PrintWriter logWriter
                     = new PrintWriter(new BufferedWriter(new FileWriter(logFile, true))); //create FileWriter with true to allow appending
