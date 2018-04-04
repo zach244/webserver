@@ -33,8 +33,8 @@ public class Connection implements Runnable {
                     new BufferedReader(new InputStreamReader(client.getInputStream()));
             OutputStream out =
                     new BufferedOutputStream(client.getOutputStream());
-			
-			String line;
+
+            String line;
             String[] splits;
             String status = null;
             String date = null;
@@ -95,15 +95,15 @@ public class Connection implements Runnable {
             splits[1] = splits[1].substring(1); //need to remove leading / from file path
             out.write(fullHeader.getBytes()); //write the header to the client
             out.flush();
-			
-			InputStream file = new BufferedInputStream(new FileInputStream(splits[1])); //create an inputstream to get the file
-			byte[] buffer = new byte[BUFFER_SIZE];
+
+            InputStream file = new BufferedInputStream(new FileInputStream(splits[1])); //create an inputstream to get the file
+            byte[] buffer = new byte[BUFFER_SIZE];
             int numBytes;
             while ((numBytes = file.read(buffer)) != -1) { //write the file to the client
                 out.write(buffer, 0, numBytes);
-			}
-			out.flush(); //flush
-			
+            }
+            out.flush(); //flush
+
             File logFile = new File(configuration.getLogFile()); //create the Logfile Object
             File logParentDirectory = new File(logFile.getParent());//used to see if Log directory is valid
             if (!logFile.exists() && !logParentDirectory.isDirectory()) { //if the log file doens't exist and parent directory doesn't exist
@@ -111,15 +111,15 @@ public class Connection implements Runnable {
                 logFile.createNewFile(); //create new logfile
             } else if (!logFile.exists() && logParentDirectory.isDirectory()) { // if the log file doesn't exist and the directory does
                 logFile.createNewFile(); //create new log file
-			}
-			
+            }
+
             logLine = "\n" + client.getLocalAddress().toString() + " " + "[" + logDate + "]" + " " //write to LogFile
                     + line + " " + logStatus + " " + contentLength;
             PrintWriter logWriter
                     = new PrintWriter(new BufferedWriter(new FileWriter(logFile, true))); //create FileWriter with true to allow appending
             logWriter.println(logLine);//append logline onto logfile
-			
-			file.close(); //close all connections
+
+            file.close(); //close all connections
             in.close();
             out.close();
             logWriter.close();
